@@ -1,9 +1,9 @@
-import s from './Layout.module.scss';
+import s from './LayoutMenu.module.scss';
 import {NavLink, Outlet} from "react-router-dom";
-import Button from "../Components/Button/Button.tsx";
+import Button from "../../Components/Button/Button.tsx";
 import cn from "clsx";
 
-const Layout = () => {
+const LayoutMenu = () => {
     return <div className={s['layout']}>
         <div className={s['sidebar']}>
             <div className={s['user']}>
@@ -31,4 +31,4 @@ const Layout = () => {
     </div>;
 };
 
-export default Layout;
+export default LayoutMenu;

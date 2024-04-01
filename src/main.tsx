@@ -5,13 +5,15 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Menu from "./pages/Menu/Menu.tsx";
 import Cart from "./pages/Cart/Cart.tsx";
 import Error from "./pages/Error/Error.tsx";
-import Layout from "./Layout/Layout.tsx";
+import LayoutMenu from "./Layout/Menu/LayoutMenu.tsx";
 import Product from "./Components/Product/Product.tsx";
+import axios from "axios";
+import {BASE_URL} from "./helpers/API.ts";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Layout />,
+        element: <LayoutMenu />,
         children: [
             {
                 path: '/',
@@ -23,7 +25,12 @@ const router = createBrowserRouter([
             },
             {
                 path:'/product/:id',
-                element:<Product/>
+                element:<Product/>,
+                errorElement:<>Ошибка</>,
+                loader: async ({params})=>{
+                    const {data} = await axios.get(`${BASE_URL}/products/${params.id}`);
+                    return data;
+                }
             }
 
         ]
