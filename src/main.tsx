@@ -9,30 +9,47 @@ import LayoutMenu from "./Layout/Menu/LayoutMenu.tsx";
 import Product from "./Components/Product/Product.tsx";
 import axios from "axios";
 import {BASE_URL} from "./helpers/API.ts";
+import LayoutAuth from "./Layout/Auth/LayoutAuth.tsx";
+import Login from "./pages/Login/Login.tsx";
+import Register from "./pages/Register/Register.tsx";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <LayoutMenu />,
+        element: <LayoutMenu/>,
         children: [
             {
                 path: '/',
-                element: <Menu />
+                element: <Menu/>
             },
             {
                 path: '/cart',
                 element: <Cart/>
             },
             {
-                path:'/product/:id',
-                element:<Product/>,
-                errorElement:<>Ошибка</>,
-                loader: async ({params})=>{
+                path: '/product/:id',
+                element: <Product/>,
+                errorElement: <>Ошибка</>,
+                loader: async ({params}) => {
                     const {data} = await axios.get(`${BASE_URL}/products/${params.id}`);
                     return data;
                 }
             }
 
+        ]
+    },
+    {
+        path: '/auth/',
+        element: <LayoutAuth/>,
+        children: [
+            {
+                path: '/auth/login',
+                element: <Login/>
+            },
+            {
+                path: '/auth/register',
+                element: <Register/>
+            },
         ]
     },
     {

@@ -1,32 +1,13 @@
-import s from './LayoutAuth.module.scss';
-import {NavLink, Outlet} from "react-router-dom";
-import Button from "../../Components/Button/Button.tsx";
-import cn from "clsx";
+import {Outlet} from "react-router-dom";
+import styles from "./LayoutAuth.module.scss";
 
 const LayoutAuth = () => {
-    return <div className={s['layout']}>
-        <div className={s['sidebar']}>
-            <div className={s['user']}>
-                <img className={s['avatar']} src="/avatar.png" alt="Аватар пользователя"/>
-                <div className={s['name']}>Антон Ларичев</div>
-                <div className={s['email']}>alari@ya.ru</div>
-            </div>
-            <div className={s['menu']}>
-                <NavLink to='/' className={ ({isActive})=>cn(s['link'],{[s.active]:isActive})}>
-                    <img src="/menu-icon.svg" alt="Иконка меню"/>
-                    Меню
-                </NavLink>
-                <NavLink to='/cart' className={ ({isActive})=>cn(s['link'],{[s.active]:isActive})}>
-                    <img src="/cart-icon.svg" alt="Иконка корзины"/>Корзина
-                </NavLink>
-            </div>
-            <Button className={s['exit']}>
-                <img src="/exit-icon.svg" alt="Иконка выхода"/>
-                Выход
-            </Button>
+    return <div className={styles['layout']}>
+        <div className={styles['logo']}>
+            <img src="/logo.svg" alt="Логотип компании" />
         </div>
-        <div className={s.content}>
-            <Outlet/>
+        <div className={styles['content']}>
+            <Outlet />
         </div>
     </div>;
 };
