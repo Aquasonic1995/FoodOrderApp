@@ -1,6 +1,6 @@
 import Input from "../../Components/Input/Input.tsx";
 import Button from "../../Components/Button/Button.tsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import s from './Login.module.scss';
 import Headling from "../../Components/Headling/Headling.tsx";
 import {FormEvent, useState} from "react";
@@ -20,6 +20,7 @@ export type LoginFormType = {
 const Login = () => {
     const [error, setError] =
         useState<string | null>(null);
+    const navigate = useNavigate(); // Use useNavigate hook
     const onFormSubmit = async (e: FormEvent) => {
         e.preventDefault();
         const target = e.target as typeof e.target & LoginFormType;
@@ -34,7 +35,8 @@ const Login = () => {
                 password
             });
             console.log(data);
-            localStorage.setItem('jwt', data.access_token);
+            localStorage.setItem('jwt', data?.access_token);
+          navigate("/");
         } catch (e) {
             if (e instanceof AxiosError) {
                 setError(e.response?.data.message);
@@ -44,7 +46,7 @@ const Login = () => {
         return (
             <div className={s.login}>
                 <Headling>Вход</Headling>
-                <form className={s.form} onSubmit={onFormSubmit}>
+                <form className={s.form} onSubmit={onFormSubmit} name="form" >
                     <div className={s.field}>
                         <label htmlFor="email"></label>
                         <Input id="email" name="email" placeholder="Email..."/>

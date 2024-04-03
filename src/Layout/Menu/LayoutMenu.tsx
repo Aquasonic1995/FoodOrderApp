@@ -1,9 +1,14 @@
 import s from './LayoutMenu.module.scss';
-import {NavLink, Outlet} from "react-router-dom";
+import {NavLink, Outlet, useNavigate} from "react-router-dom";
 import Button from "../../Components/Button/Button.tsx";
 import cn from "clsx";
 
 const LayoutMenu = () => {
+    const navigate = useNavigate();
+    const onExitClick = ()=>{
+        localStorage.setItem('jwt', '');
+        navigate('./auth/login/');
+    };
     return <div className={s['layout']}>
         <div className={s['sidebar']}>
             <div className={s['user']}>
@@ -20,7 +25,7 @@ const LayoutMenu = () => {
                     <img src="/cart-icon.svg" alt="Иконка корзины"/>Корзина
                 </NavLink>
             </div>
-            <Button className={s['exit']}>
+            <Button className={s['exit']} onClick={onExitClick}>
                 <img src="/exit-icon.svg" alt="Иконка выхода"/>
                 Выход
             </Button>
