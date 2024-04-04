@@ -2,11 +2,15 @@ import s from './LayoutMenu.module.scss';
 import {NavLink, Outlet, useNavigate} from "react-router-dom";
 import Button from "../../Components/Button/Button.tsx";
 import cn from "clsx";
+import {useDispatch} from "react-redux";
+import {userActions} from "../../store/user.slice.ts";
+import {AppDispatch} from "../../store/store.ts";
 
 const LayoutMenu = () => {
+ const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const onExitClick = ()=>{
-        localStorage.setItem('jwt', '');
+          dispatch(userActions.logout());
         navigate('./auth/login/');
     };
     return <div className={s['layout']}>

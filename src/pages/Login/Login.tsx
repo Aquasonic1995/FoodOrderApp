@@ -7,6 +7,9 @@ import {FormEvent, useState} from "react";
 import axios, {AxiosError} from "axios";
 import {BASE_URL} from "../../helpers/API.ts";
 import {LoginResponse} from "../../Components/interfaces/auth.interface.ts";
+import {useDispatch} from "react-redux";
+import {userActions} from "../../store/user.slice.ts";
+import {AppDispatch} from "../../store/store.ts";
 
 export type LoginFormType = {
     email: {
@@ -21,6 +24,7 @@ const Login = () => {
     const [error, setError] =
         useState<string | null>(null);
     const navigate = useNavigate(); // Use useNavigate hook
+    const dispatch = useDispatch<AppDispatch>();
     const onFormSubmit = async (e: FormEvent) => {
         e.preventDefault();
         const target = e.target as typeof e.target & LoginFormType;
@@ -34,8 +38,7 @@ const Login = () => {
                 email,
                 password
             });
-            console.log(data);
-            localStorage.setItem('jwt', data?.access_token);
+            dispatch(userActions.addJwt(data?.access_token));
           navigate("/");
         } catch (e) {
             if (e instanceof AxiosError) {
