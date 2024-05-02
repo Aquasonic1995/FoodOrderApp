@@ -1,15 +1,16 @@
-export function loadState<T>(key:string):T | undefined {
-    try{
+export function loadState<T>(key: string): T | undefined {
+    try {
         const jsonState = localStorage.getItem(key);
-        if(!jsonState){
+        if (!jsonState) {
             return undefined;
         }
         return JSON.parse(jsonState);
-    } catch (e){
+    } catch (e) {
         return undefined;
     }
 }
-export function saveState<T>(state:T, key:string){
+
+export function saveState<T>(state: T, key: string) {
     const stringState = JSON.stringify(state);
     localStorage.setItem(key, stringState);
 }
