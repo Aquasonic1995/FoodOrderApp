@@ -18,7 +18,6 @@ export type LoginFormType = {
 }
 
 const Login = () => {
-    const [a, setA] = useState('a');
     const [error, setError] =
         useState<string | null>(null);
     const navigate = useNavigate(); // Use useNavigate hook
@@ -36,8 +35,8 @@ const Login = () => {
     const sendLogin = async (email: string, password: string) => {
         dispatch(login({email, password}));
     };
-  const onButtonClick = (a:string) => () => {
-      console.log(a);
+  const onButtonClick = () => () => {
+
   };
 
     return (
@@ -53,7 +52,7 @@ const Login = () => {
                     <Input id="password" name="password" placeholder="Password..." type="password"/>
                 </div>
                 {error && <div className={s.error}>{error}</div>}
-                <Button appearance="big" onClick={onButtonClick(a)}>Вход</Button>
+                <Button appearance="big" >Вход</Button>
                 <div className={s.links}>
                     <div>Нет аккаунта?</div>
                     <div>

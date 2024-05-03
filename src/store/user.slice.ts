@@ -40,8 +40,8 @@ export const userSlice = createSlice({
                 state.jwt = action.payload.access_token;
             });
         builder.addCase(login.rejected,
-            (state, error)=>{
-            console.log(error);
+            (message, error)=>{
+            console.log(error.error.message);
             }
             );
     }
